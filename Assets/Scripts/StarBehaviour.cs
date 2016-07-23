@@ -9,6 +9,8 @@ public class StarBehaviour : MonoBehaviour {
     GameManager Manager;
     LineRenderer LinkRenderer;
 
+    int Score;
+
 	// Use this for initialization
 	void Start () {
 
@@ -47,5 +49,16 @@ public class StarBehaviour : MonoBehaviour {
     {
 
         gameObject.layer = Layer;
+    }
+
+    public void SetScore(int Value)
+    {
+
+        Score = Value;
+    }
+
+    public int GetScore()
+    {
+        return Score;
     }
 }

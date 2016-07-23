@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 //Player enum
 public enum Player
@@ -10,24 +11,38 @@ public enum Player
 
 public class GameManager : MonoBehaviour {
 
+    //Stars
     //The StarPrefab
     public GameObject Star;
     //Empty Gameobject to keep all of the stars in
     public GameObject StarParent;
-
-    //The star that was last clicked
-    public GameObject CardParent;
-    public GameObject CardPrefab;
-    StarBehaviour LinkingStar;
-    //The first star in the sequence
-    StarBehaviour FirstStar;
-
     //Sprites for each star
     public Sprite StarBase;
     public Sprite StarFirst;
 
-    public Player Turn; // Tracks whose turn it is
+
+    //Move Cards
+    //Empty game object to store them in
+    public GameObject CardParent;
+    //Prefab
+    public GameObject CardPrefab;
     public GameObject[] Cards;
+
+    //Link Management
+    //The star that was last clicked
+    StarBehaviour LinkingStar;
+    //The first star in the sequence
+    StarBehaviour FirstStar;
+
+    public Player Turn; // Tracks whose turn it is
+
+    //Player Scoring
+    int CurrentScoreTotal = 0;
+    int P1Score = 0;
+    int P2Score = 0;
+
+    public Text P1Display;
+    public Text P2Display;
 
 	// Use this for initialization
 	void Start () {
@@ -37,7 +52,7 @@ public class GameManager : MonoBehaviour {
         LinkingStar = null;
         int StarNumber = 40;    //Number of stars
         int CardNumber = 7;     //Number of cards
-        Vector3 CurrentCardPos = new Vector3(-5, 0, 0); //The starting position of cards
+        Vector3 CurrentCardPos = new Vector3(-5.0f, -4.5f, 0.0f); //The starting position of cards
 
         //Spawning stars
         for (int i = 0; i < StarNumber; i++) {
@@ -51,14 +66,13 @@ public class GameManager : MonoBehaviour {
 
 
             GameObject StarClone = (GameObject) Instantiate(Star, Pos, Zero);
+            StarClone.GetComponent<StarBehaviour>().SetScore(1);
             StarClone.transform.parent = StarParent.transform;
             StarClone.name = "Star " + i;
         }
 
 
         //Spawning cards
-
-
         for (int i = 0; i < CardNumber; i++)
         {
             int randCardNumber = Random.Range(3, 10);
@@ -83,6 +97,9 @@ public class GameManager : MonoBehaviour {
             FirstStar = null;
 
         }
+
+        P1Display.text = "Score: " + P1Score;
+        P2Display.text = "Score: " + P2Score;
     }
 
     public bool SetLinkingStar(StarBehaviour StarToLink)
@@ -95,15 +112,17 @@ public class GameManager : MonoBehaviour {
             LinkingStar = null;
             FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarBase;
             FirstStar = null;
-
-            Debug.Log(Turn);
             
             if (Turn == Player.Player2)
             {
+                P2Score += CurrentScoreTotal;
+                CurrentScoreTotal = 0; 
                 Turn = Player.Player1;
             }
             else
             {
+                P1Score += CurrentScoreTotal;
+                CurrentScoreTotal = 0;
                 Turn = Player.Player2;
             }
 
@@ -122,6 +141,7 @@ public class GameManager : MonoBehaviour {
 
                     LinkingStar.SetLineTarget(StarToLink.GetComponent<Transform>(), Turn);
                     LinkingStar = StarToLink;
+                    CurrentScoreTotal += StarToLink.GetScore();
                     return true;
                 }
             }
@@ -134,6 +154,7 @@ public class GameManager : MonoBehaviour {
             LinkingStar = StarToLink;
             FirstStar = StarToLink;
             FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarFirst;
+            CurrentScoreTotal = StarToLink.GetScore(); ;
             return false;
         }
 
