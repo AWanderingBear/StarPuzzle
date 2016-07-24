@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
     public Text P1Display;
     public Text P2Display;
 
-    public int StarNumber = 40;    //Number of stars
+    public int StarNumber = 50;    //Number of stars
     public int CardNumber = 7;     //Number of cards
 
     //public int movesAvailable = 10;
@@ -68,8 +68,8 @@ public class GameManager : MonoBehaviour {
         //Spawning stars
         for (int i = 0; i < StarNumber; i++) {
 
-            float XCoord = Random.Range(-6.0f, 6.0f);
-            float YCoord = Random.Range(-4.0f, 4.0f);
+            float XCoord = Random.Range(-10.0f, 9.0f);
+            float YCoord = Random.Range(-3.0f, 3.5f);
 
             Vector3 Pos = new Vector3(XCoord, YCoord, 0);
 
@@ -217,7 +217,9 @@ public class GameManager : MonoBehaviour {
                 {
 
                     LinkingStar.SetLineTarget(StarToLink.GetComponent<Transform>(), Turn);
+                    CurrentScoreTotal += StarToLink.GetScore();
                     LinkingStar = StarToLink;
+                   
                     movesAvailable--;
                     return true;
                 }
