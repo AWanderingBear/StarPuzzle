@@ -126,6 +126,18 @@ MonoBehaviour:
   CardParent: {fileID: 440984485}
   CardPrefab: {fileID: 125710, guid: 4eef7c26423431b408eddeb824307c98, type: 2}
   Cards: []
+  Default:
+    serializedVersion: 2
+    m_Bits: 1
+  Ignore:
+    serializedVersion: 2
+    m_Bits: 4
+  RayMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  StarNumber: 40
+  CardNumber: 7
+  movesAvailable: 0
   Turn: 0
   P1Display: {fileID: 330650725}
   P2Display: {fileID: 581886507}
@@ -613,7 +625,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1917317832}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1

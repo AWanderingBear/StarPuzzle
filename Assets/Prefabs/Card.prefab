@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 468016}
   - 212: {fileID: 21237498}
   - 114: {fileID: 11478906}
+  - 61: {fileID: 6147792}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -30,6 +31,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &6147792
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125710}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5}
 --- !u!114 &11478906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -41,6 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd1f17019c5c084895f6500949403b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardMovesNumber: 0
   Cards:
   - {fileID: 21300000, guid: 68d4e2c11a33e7544a087973782da1f9, type: 3}
   - {fileID: 21300000, guid: 616fb29955208b746b16d5f5b3cd1302, type: 3}
