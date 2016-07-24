@@ -13,11 +13,13 @@ public class GameManager : MonoBehaviour {
 
     //Stars
     //The StarPrefab
-    public GameObject Star;
+    public GameObject StarOnePt;
+    public GameObject StarTwoPt;
+    public GameObject StarThreePt;
+
     //Empty Gameobject to keep all of the stars in
     public GameObject StarParent;
     //Sprites for each star
-    public Sprite StarBase;
     public Sprite StarFirst;
 
 
@@ -60,15 +62,45 @@ public class GameManager : MonoBehaviour {
             float XCoord = Random.Range(-6.0f, 6.0f);
             float YCoord = Random.Range(-4.0f, 4.0f);
 
-            Vector3 Pos = new Vector3(XCoord, YCoord, 0); 
+            Vector3 Pos = new Vector3(XCoord, YCoord, 0);
 
-            Quaternion Zero = new Quaternion(0,0,0,0);
+            Quaternion Zero = new Quaternion(0, 0, 0, 0);
 
+            int Score = Random.Range(1, 4);
+            Debug.Log(Score);
+            GameObject StarClone;
 
-            GameObject StarClone = (GameObject) Instantiate(Star, Pos, Zero);
-            StarClone.GetComponent<StarBehaviour>().SetScore(1);
-            StarClone.transform.parent = StarParent.transform;
-            StarClone.name = "Star " + i;
+            switch (Score) {
+
+                case 1: {
+
+                        StarClone = (GameObject)Instantiate(StarOnePt, Pos, Zero);
+                    }
+                    break;
+
+                case 2: {
+                        StarClone = (GameObject)Instantiate(StarTwoPt, Pos, Zero);
+                    }
+                    break;
+
+                case 3:
+                    {
+                        StarClone = (GameObject)Instantiate(StarThreePt, Pos, Zero);
+                    }
+                    break;
+
+                default:
+                    StarClone = null;
+                    break;
+            }
+
+            if (StarClone != null)
+            {
+                StarClone.GetComponent<StarBehaviour>().SetScore(Score);
+                StarClone.transform.parent = StarParent.transform;
+                StarClone.name = "Star " + i;
+            }
+
         }
 
 
@@ -93,7 +125,25 @@ public class GameManager : MonoBehaviour {
         if (Input.GetMouseButtonDown(1))
         {
             LinkingStar = null;
-            FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarBase;
+            switch (FirstStar.GetScore())
+            {
+
+                case 1:
+                    FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarOnePt.GetComponentInChildren<SpriteRenderer>().sprite;
+                    break;
+
+                case 2:
+                    FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarTwoPt.GetComponentInChildren<SpriteRenderer>().sprite;
+                    break;
+
+                case 3:
+                    FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarThreePt.GetComponentInChildren<SpriteRenderer>().sprite;
+                    break;
+
+                default:
+                    break;
+            }
+            
             FirstStar = null;
 
         }
@@ -110,7 +160,24 @@ public class GameManager : MonoBehaviour {
 
             LinkingStar.SetLineTarget(StarToLink.GetComponent<Transform>(), Turn);
             LinkingStar = null;
-            FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarBase;
+            switch (FirstStar.GetScore())
+            {
+
+                case 1:
+                    FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarOnePt.GetComponentInChildren<SpriteRenderer>().sprite;
+                    break;
+
+                case 2:
+                    FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarTwoPt.GetComponentInChildren<SpriteRenderer>().sprite;
+                    break;
+
+                case 3:
+                    FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarThreePt.GetComponentInChildren<SpriteRenderer>().sprite;
+                    break;
+
+                default:
+                    break;
+            }
             FirstStar = null;
             
             if (Turn == Player.Player2)
