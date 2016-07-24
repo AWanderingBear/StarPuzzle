@@ -117,9 +117,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca61a0ea275b4aa4a8af6735a126c3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Star: {fileID: 151458, guid: 404cd8f8f8ac73042a55898ce7845504, type: 2}
+  StarOnePt: {fileID: 151458, guid: 404cd8f8f8ac73042a55898ce7845504, type: 2}
+  StarTwoPt: {fileID: 1000013117585230, guid: 9dad9b3ff7194174799c149454983fea, type: 2}
+  StarThreePt: {fileID: 1000012197301436, guid: ecb1caf9d8cba7f4d86daf8ea6598a58,
+    type: 2}
   StarParent: {fileID: 797559873}
-  StarBase: {fileID: 21300000, guid: 9a142f0c82ea8f4408a8720a33c61b80, type: 3}
   StarFirst: {fileID: 21300000, guid: 087ba47356ad59d4b9efeac166f6f2bd, type: 3}
   CardParent: {fileID: 440984485}
   CardPrefab: {fileID: 125710, guid: 4eef7c26423431b408eddeb824307c98, type: 2}
@@ -172,8 +174,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -542, y: 282}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -529, y: 273}
+  m_SizeDelta: {x: 187, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &330650725
 MonoBehaviour:
@@ -195,13 +197,13 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: c78827e15d9cc364faceae63ab656399, type: 3}
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
-    m_Alignment: 0
+    m_MaxSize: 230
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -361,8 +363,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 536, y: 282.0001}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 539, y: 273}
+  m_SizeDelta: {x: 166, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &581886507
 MonoBehaviour:
@@ -384,13 +386,13 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: c78827e15d9cc364faceae63ab656399, type: 3}
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
-    m_Alignment: 0
+    m_MaxSize: 230
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
