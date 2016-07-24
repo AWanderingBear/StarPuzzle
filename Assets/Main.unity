@@ -128,6 +128,9 @@ MonoBehaviour:
   RayMask:
     serializedVersion: 2
     m_Bits: 4294967291
+  StarNumber: 40
+  CardNumber: 7
+  movesAvailable: 0
 --- !u!4 &33668066
 Transform:
   m_ObjectHideFlags: 0
@@ -312,8 +315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7489bb9558f19544cab112fa9c095bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Star1: {fileID: 0}
-  Star2: {fileID: 0}
 --- !u!120 &1445060240
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -392,7 +393,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1917317832}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:

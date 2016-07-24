@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 
     StarBehaviour LinkingStar;
     StarBehaviour FirstStar;
+    CardBehaviour SelectedCard;
 
     public Sprite StarBase;
     public Sprite StarFirst;
@@ -21,13 +22,23 @@ public class GameManager : MonoBehaviour {
     public LayerMask Ignore;
     public LayerMask RayMask;
 
-	// Use this for initialization
-	void Start () {
+    public int StarNumber = 40;    //Number of stars
+    public int CardNumber = 7;     //Number of cards
+
+    //public int movesAvailable = 10;
+    public int movesAvailable = 0;
+
+    //have to centre that
+
+    // Use this for initialization
+    void Start () {
 
         LinkingStar = null;
-        int StarNumber = 40;    //Number of stars
-        int CardNumber = 7;     //Number of cards
-        Vector3 CurrentCardPos = new Vector3(-5, 0, 0); //The starting position of cards
+
+        int StartingCardX = CardNumber * -1 + 1;
+        Vector3 StartingCardPos = new Vector3(StartingCardX, -4.0f, 0); //The starting position of cards
+
+
 
         //Spawning stars
         for (int i = 0; i < StarNumber; i++) {
@@ -54,18 +65,17 @@ public class GameManager : MonoBehaviour {
 
         //Spawning cards
 
-
         for (int i = 0; i < CardNumber; i++)
         {
             int randCardNumber = Random.Range(3, 10);
 
-            GameObject CardClone = (GameObject)Instantiate(CardPrefab, CurrentCardPos, transform.rotation);
+            GameObject CardClone = (GameObject)Instantiate(CardPrefab, StartingCardPos, transform.rotation);
             CardClone.transform.parent = CardParent.transform;
             CardClone.name = "Card " + i;
 
             CardClone.GetComponent<CardBehaviour>().initialize(randCardNumber);
 
-            CurrentCardPos.x += 2;
+            StartingCardPos.x += 2;
         }
 	}
 
@@ -95,7 +105,7 @@ public class GameManager : MonoBehaviour {
 
             return true;
         }
-        else if (LinkingStar != null && StarToLink != LinkingStar)
+        else if (LinkingStar != null && StarToLink != LinkingStar && (movesAvailable > 0))
         {
 
             RaycastHit2D Hit = Physics2D.Raycast(LinkingStar.transform.position, StarToLink.transform.position - LinkingStar.transform.position);
@@ -107,13 +117,14 @@ public class GameManager : MonoBehaviour {
                 {
                     LinkingStar.SetLineTarget(StarToLink.GetComponent<Transform>());
                     LinkingStar = StarToLink;
+                    movesAvailable--;
                     return true;
                 }
             }
 
             return false;
         }
-        else if (FirstStar == null)
+        else if (FirstStar == null && (movesAvailable > 0))
         {
 
             LinkingStar = StarToLink;
@@ -121,7 +132,24 @@ public class GameManager : MonoBehaviour {
             FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarFirst;
             return false;
         }
-
+        else
+        {
+            if (movesAvailable <= 0)
+            {
+                Debug.Log("No moves available"); //We need to display this to the user somehow.
+            }
+            else
+            {
+                Debug.Log("Unknown error in linking stars. ");
+            }
+        }
         return false;
+    }
+
+    public bool SetMovesAvailable(int CardMovesNumber)
+    {
+       movesAvailable = CardMovesNumber;
+
+        return true;
     }
 }

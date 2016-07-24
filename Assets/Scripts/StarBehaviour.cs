@@ -21,7 +21,6 @@ public class StarBehaviour : MonoBehaviour {
 
     void OnMouseDown()
     {
-
         Manager.SetLinkingStar(this);
     }
 
