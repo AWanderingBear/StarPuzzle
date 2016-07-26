@@ -51,9 +51,14 @@ public class GameManager : MonoBehaviour {
     public int CardNumber = 7;     //Number of cards
 
     //public int movesAvailable = 10;
-    public int movesAvailable = 0;
+    int movesAvailable = 0;
 
-    //have to centre that
+    //Audio
+    int Clicks = 0;
+    public AudioSource AudioPlayer;
+    public AudioClip[] ClickSounds;
+    public AudioClip ConstellationSound;
+
 
     // Use this for initialization
     void Start () {
@@ -168,6 +173,11 @@ public class GameManager : MonoBehaviour {
         if (StarToLink == FirstStar)
         {
 
+            AudioPlayer.clip = ConstellationSound;
+            AudioPlayer.Play();
+
+            StarToLink.Particle();
+
             LinkingStar.SetLineTarget(StarToLink.GetComponent<Transform>(), Turn);
             LinkingStar = null;
             switch (FirstStar.GetScore())
@@ -219,7 +229,13 @@ public class GameManager : MonoBehaviour {
                     LinkingStar.SetLineTarget(StarToLink.GetComponent<Transform>(), Turn);
                     CurrentScoreTotal += StarToLink.GetScore();
                     LinkingStar = StarToLink;
-                   
+
+                    StarToLink.Particle();
+
+                    Clicks += 1;
+                    AudioPlayer.clip = ClickSounds[Clicks - 1];
+                    AudioPlayer.Play();
+
                     movesAvailable--;
                     return true;
                 }
@@ -232,8 +248,16 @@ public class GameManager : MonoBehaviour {
 
             LinkingStar = StarToLink;
             FirstStar = StarToLink;
+
+            StarToLink.Particle();
+
             FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarFirst;
             CurrentScoreTotal = StarToLink.GetScore(); ;
+
+            Clicks = 1;
+            AudioPlayer.clip = ClickSounds[Clicks - 1];
+            AudioPlayer.Play();
+
             return false;
         }
         else

@@ -6,6 +6,8 @@ public class StarBehaviour : MonoBehaviour {
     public Material PlayerOneMat;
     public Material PlayerTwoMat;
 
+    public ParticleSystem ParticleEmitter;
+
     GameManager Manager;
     LineRenderer LinkRenderer;
 
@@ -59,5 +61,11 @@ public class StarBehaviour : MonoBehaviour {
     public int GetScore()
     {
         return Score;
+    }
+
+    public void Particle()
+    {
+
+        ParticleEmitter.Emit(60);
     }
 }
