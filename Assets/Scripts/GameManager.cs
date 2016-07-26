@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour {
     //The star that was last clicked
     StarBehaviour LinkingStar;
     //The first star in the sequence
-    StarBehaviour FirstStar;
+    StarBehaviour[] StarList;
     CardBehaviour SelectedCard;
 
     public Player Turn; // Tracks whose turn it is
@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour {
     public bool SetLinkingStar(StarBehaviour StarToLink)
     {
 
-        if (StarToLink == FirstStar)
+        if (StarToLink == StarList[0])
         {
 
             AudioPlayer.clip = ConstellationSound;
@@ -154,25 +154,25 @@ public class GameManager : MonoBehaviour {
 
             LinkingStar.SetLineTarget(StarToLink.GetComponent<Transform>(), Turn);
             LinkingStar = null;
-            switch (FirstStar.GetScore())
+            switch (StarList[0].GetScore())
             {
 
                 case 1:
-                    FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarOnePt.GetComponentInChildren<SpriteRenderer>().sprite;
+                    StarList[0].GetComponentInChildren<SpriteRenderer>().sprite = StarOnePt.GetComponentInChildren<SpriteRenderer>().sprite;
                     break;
 
                 case 2:
-                    FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarTwoPt.GetComponentInChildren<SpriteRenderer>().sprite;
+                    StarList[0].GetComponentInChildren<SpriteRenderer>().sprite = StarTwoPt.GetComponentInChildren<SpriteRenderer>().sprite;
                     break;
 
                 case 3:
-                    FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarThreePt.GetComponentInChildren<SpriteRenderer>().sprite;
+                    StarList[0].GetComponentInChildren<SpriteRenderer>().sprite = StarThreePt.GetComponentInChildren<SpriteRenderer>().sprite;
                     break;
 
                 default:
                     break;
             }
-            FirstStar = null;
+            StarList[0] = null;
             
             if (Turn == Player.Player2)
             {
@@ -204,6 +204,7 @@ public class GameManager : MonoBehaviour {
                     CurrentScoreTotal += StarToLink.GetScore();
                     LinkingStar = StarToLink;
 
+                    StarList
                     StarToLink.Particle();
 
                     Clicks += 1;
@@ -217,15 +218,15 @@ public class GameManager : MonoBehaviour {
 
             return false;
         }
-        else if (FirstStar == null && (movesAvailable > 0))
+        else if (StarList[0] == null && (movesAvailable > 0))
         {
 
             LinkingStar = StarToLink;
-            FirstStar = StarToLink;
+            StarList[0] = StarToLink;
 
             StarToLink.Particle();
 
-            FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarFirst;
+            StarList[0].GetComponentInChildren<SpriteRenderer>().sprite = StarFirst;
             CurrentScoreTotal = StarToLink.GetScore(); ;
 
             Clicks = 1;
