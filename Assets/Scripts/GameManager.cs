@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour {
 
     //Player Scoring
     int CurrentScoreTotal = 0;
-    int P1Score = 0;
-    int P2Score = 0;
+    public int P1Score = 0;
+    public int P2Score = 0;
 
     public Text P1Display;
     public Text P2Display;
