@@ -81,7 +81,6 @@ public class GameManager : MonoBehaviour {
             Quaternion Zero = new Quaternion(0, 0, 0, 0);
 
             int Score = Random.Range(1, 4);
-            Debug.Log(Score);
             GameObject StarClone;
 
             switch (Score) {
@@ -137,32 +136,6 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            LinkingStar = null;
-            switch (FirstStar.GetScore())
-            {
-
-                case 1:
-                    FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarOnePt.GetComponentInChildren<SpriteRenderer>().sprite;
-                    break;
-
-                case 2:
-                    FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarTwoPt.GetComponentInChildren<SpriteRenderer>().sprite;
-                    break;
-
-                case 3:
-                    FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarThreePt.GetComponentInChildren<SpriteRenderer>().sprite;
-                    break;
-
-                default:
-                    break;
-            }
-            
-            FirstStar = null;
-
-        }
-
         P1Display.text = "Score: " + P1Score;
         P2Display.text = "Score: " + P2Score;
     }
@@ -175,6 +148,7 @@ public class GameManager : MonoBehaviour {
 
             AudioPlayer.clip = ConstellationSound;
             AudioPlayer.Play();
+            Clicks = 0;
 
             StarToLink.Particle();
 
