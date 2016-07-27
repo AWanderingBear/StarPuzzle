@@ -162,9 +162,9 @@ public class GameManager : MonoBehaviour {
 
         //Spawning cards
 
-        int StartingCardY = CardNumber * -1 + 2;
+        int StartingCardY = (CardNumber * -1) - 4;
 
-        float CardOffSet = SpawnBoundaries[1].position.x + (SpawnBoundaries[3].position.x - SpawnBoundaries[1].position.x)/2;
+        float CardOffSet = SpawnBoundaries[1].position.x + (SpawnBoundaries[3].position.x - SpawnBoundaries[1].position.x)/2 + 0.5f;
 
         Vector3 StartingCardPos = new Vector3(CardOffSet, StartingCardY, 0); //The starting position of cards
 
@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour {
 
             CardClone.GetComponent<CardBehaviour>().initialize(randCardNumber);
 
-            StartingCardPos.y += 1.5f;
+            StartingCardPos.y += 3.6f;
         }
 	}
 
@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviour {
             firstTurnBonus.text = "+1 Move for going Second!";
         else
             firstTurnBonus.text = "";
-        playerTurn.text = "Current Player: " + Turn.ToString();
+        playerTurn.text = Turn.ToString() +"'s turn";
 
         if (CardAlreadyChosen == false)
         {
