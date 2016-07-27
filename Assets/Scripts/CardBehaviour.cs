@@ -6,6 +6,7 @@ public class CardBehaviour : MonoBehaviour
 
     GameManager Manager;
     public int CardMovesNumber;
+    public int CardUsed = 0; // 0 = not used, 1 = 1 player used, 2 = 2 player used, 3 = both player used.
 
     public Sprite[] Cards;
 
@@ -24,23 +25,26 @@ public class CardBehaviour : MonoBehaviour
     public void initialize(int randCardNumber)
     {
         //FirstStar.GetComponentInChildren<SpriteRenderer>().sprite = StarBase;
-
         GetComponent<SpriteRenderer>().sprite = Cards[randCardNumber - 3];
         CardMovesNumber = randCardNumber;
     }
 
     void OnMouseDown()
     {
-        Manager.SetMovesAvailable(CardMovesNumber);
-        for (int i = 0; i < Cards.Length; i++)
+
+        if (Manager.Turn == Player.Player1 && CardUsed != 1 && CardUsed != 3)
         {
-            if (Cards[i].name == name)
-            {
-               // DestroyObject(Cards[i]);
-                //Cards[i] = null;
-            }
+            Manager.SetMovesAvailable(CardMovesNumber, gameObject);
+            CardUsed += 1;
         }
-        Debug.Log("The " + name + " was clicked");
-        //Debug.Log("The " + this.GameObject.name + " was clicked");
-    }
+        else if (Manager.Turn == Player.Player2 && CardUsed != 2 && CardUsed != 3)
+        {
+            Manager.SetMovesAvailable(CardMovesNumber, gameObject);
+            CardUsed += 2;
+        }
+            Debug.Log("The " + name + " was clicked");
+            //Debug.Log("The " + this.GameObject.name + " was clicked");
+    }        
+
 }
+
