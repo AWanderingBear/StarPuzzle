@@ -1,0 +1,53 @@
+Initialize engine version: 5.4.0b21 (b9b5b8f40e73)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 760 (ID=0x1187)
+    Vendor:   NVIDIA
+    VRAM:     1990 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\Users\joshua.sav6276\Desktop\StarPuzzle\StarPuzzleBuild_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\Users\joshua.sav6276\Desktop\StarPuzzle\StarPuzzleBuild_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\Users\joshua.sav6276\Desktop\StarPuzzle\StarPuzzleBuild_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading D:\Users\joshua.sav6276\Desktop\StarPuzzle\StarPuzzleBuild_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: D:\Users\joshua.sav6276\Desktop\StarPuzzle\StarPuzzleBuild_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\Users\joshua.sav6276\Desktop\StarPuzzle\StarPuzzleBuild_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\Users\joshua.sav6276\Desktop\StarPuzzle\StarPuzzleBuild_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\Users\joshua.sav6276\Desktop\StarPuzzle\StarPuzzleBuild_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\Users\joshua.sav6276\Desktop\StarPuzzle\StarPuzzleBuild_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\Users\joshua.sav6276\Desktop\StarPuzzle\StarPuzzleBuild_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.038 seconds
+Platform assembly: D:\Users\joshua.sav6276\Desktop\StarPuzzle\StarPuzzleBuild_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\Users\joshua.sav6276\Desktop\StarPuzzle\StarPuzzleBuild_Data\Managed\System.dll (this message is harmless)
+desktop: 1280x1024 60Hz; virtual: 2560x1024 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.713287 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.340897 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 267.
+Total: 0.141570 ms (FindLiveObjects: 0.017507 ms CreateObjectMapping: 0.031393 ms MarkObjects: 0.090255 ms  DeleteObjects: 0.002112 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.641193 ms
+
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 420.
+Total: 0.427428 ms (FindLiveObjects: 0.022035 ms CreateObjectMapping: 0.038033 ms MarkObjects: 0.191377 ms  DeleteObjects: 0.175680 ms)
+
+Card not chosen yet
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+The Card 6 was clicked
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+The Card 5 was clicked
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1a78 -> priority: 1 
+  Thread -> id: 1ba0 -> priority: 1 
