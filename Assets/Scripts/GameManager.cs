@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour {
     public int P1Score = 0;
     public int P2Score = 0;
     public int movesAvailable = 0;
+    private int cardPointModifier = 0;
     private bool isFirstTurn = true;
 
     public Text P1Display;
@@ -248,59 +249,53 @@ public class GameManager : MonoBehaviour {
 
             ChangeTurns();
 
-            foreach (StarBehaviour iStar in StarList)
-            {
-                iStar.Spin();
-                iStar.Particle();
-            }
 
             StarList.Clear();
-            StarList.Capacity = 0; 
+            StarList.Capacity = 0;
 
             return true;
         }
         else if (LinkingStar != null && StarToLink != LinkingStar && (movesAvailable > 0))
         {
 
-            if (!StarToLink.IsUsed()) { 
-            RaycastHit2D Hit = Physics2D.Raycast(LinkingStar.transform.position, StarToLink.transform.position - LinkingStar.transform.position);
-
-            if (Hit)
+            if (!StarToLink.IsUsed())
             {
+                RaycastHit2D Hit = Physics2D.Raycast(LinkingStar.transform.position, StarToLink.transform.position - LinkingStar.transform.position);
 
-                if (Hit.transform.name == StarToLink.transform.name)
+                if (Hit)
                 {
 
-                    LinkingStar.SetLineTarget(StarToLink.GetComponent<Transform>(), Turn);
-                    CurrentScoreTotal += StarToLink.GetScore();
-                    LinkingStar = StarToLink;
+                    if (Hit.transform.name == StarToLink.transform.name)
+                    {
 
-                    StarList.Add(StarToLink);
+                        LinkingStar.SetLineTarget(StarToLink.GetComponent<Transform>(), Turn);
+                        CurrentScoreTotal += StarToLink.GetScore();
+                        LinkingStar = StarToLink;
 
-                    StarToLink.Particle();
+                        StarList.Add(StarToLink);
 
-                    Clicks += 1;
-                    AudioPlayer.clip = ClickSounds[Clicks - 1];
-                    AudioPlayer.Play();
+                        StarToLink.Particle();
 
-                    movesAvailable--;
-                    return true;
+                        Clicks += 1;
+                        AudioPlayer.clip = ClickSounds[Clicks - 1];
+                        AudioPlayer.Play();
+
+                        movesAvailable--;
+                        return true;
+                    }
                 }
             }
-        }
-
             return false;
         }
         else if (StarList.Capacity == 0 && (movesAvailable > 0))
         {
-
             LinkingStar = StarToLink;
             StarList.Add(StarToLink);
 
             StarToLink.Particle();
 
             StarList[0].GetComponentInChildren<SpriteRenderer>().sprite = StarFirst;
-            CurrentScoreTotal = StarToLink.GetScore();
+            CurrentScoreTotal += StarToLink.GetScore();
 
             Clicks = 1;
             AudioPlayer.clip = ClickSounds[Clicks - 1];
@@ -343,7 +338,7 @@ public class GameManager : MonoBehaviour {
             else
             {
                 Debug.Log("Unknown error in linking stars. ");
-            }            
+            }
 
         }
         return false;
@@ -354,34 +349,20 @@ public class GameManager : MonoBehaviour {
         if (CardAlreadyChosen == false)
         {
             LastChosenCard = card;
+            cardPointModifier = 0;
 
-            if (Turn == Player.Player1)
+            if (CardMovesNumber > 5 && CardMovesNumber <= 7)
             {
-                if (CardMovesNumber > 5 && CardMovesNumber <= 7)
-                {
-                    P1Score -= CardMovesNumber;
-
-                }
-                if (CardMovesNumber > 7)
-                {
-                    P1Score -= 2 * CardMovesNumber;
-                }
+                cardPointModifier = 1;
             }
-            else if (Turn == Player.Player2)
+            else if (CardMovesNumber > 7)
             {
-                if (CardMovesNumber > 5 && CardMovesNumber <= 7)
-                {
-                    P2Score -= CardMovesNumber;
-
-                }
-                if (CardMovesNumber > 7)
-                {
-                    P2Score -= 2 * CardMovesNumber;
-                }
+                cardPointModifier = 2;
             }
+            CurrentScoreTotal -= cardPointModifier * CardMovesNumber;
 
-                //HOW TO MATERIALS 4 AMBER LUV U 5EVA EK OH EK
-                MeshRenderer CardRenderer = card.GetComponentInChildren<MeshRenderer>();
+            //HOW TO MATERIALS 4 AMBER LUV U 5EVA EK OH EK
+            MeshRenderer CardRenderer = card.GetComponentInChildren<MeshRenderer>();
             CardRenderer.enabled = true;
             CardRenderer.material = glowGold;
 
@@ -400,26 +381,27 @@ public class GameManager : MonoBehaviour {
 
     void ChangeTurns()
     {
-        movesAvailable = 0;
+        Material mat = null;
 
-        MeshRenderer currentCardRenderer = LastChosenCard.GetComponentInChildren<MeshRenderer>();
         if (Turn == Player.Player1)
         {
+            CurrentScoreTotal += movesAvailable * cardPointModifier;
             P1Score += CurrentScoreTotal;
             CurrentScoreTotal = 0;
             Turn = Player.Player2;
 
             if (LastChosenCard.GetComponentInChildren<CardBehaviour>().CardUsed == 3)
             {
-                currentCardRenderer.material = glowRedBlue;
+                mat = glowRedBlue;
             }
             else
             {
-                currentCardRenderer.material = glowBlue;
+                mat = glowBlue;
             }
         }
-       else if (Turn == Player.Player2)
+        else if (Turn == Player.Player2)
         {
+            CurrentScoreTotal += movesAvailable * cardPointModifier;
             P2Score += CurrentScoreTotal;
             CurrentScoreTotal = 0;
             isFirstTurn = false;
@@ -427,16 +409,24 @@ public class GameManager : MonoBehaviour {
 
             if (LastChosenCard.GetComponentInChildren<CardBehaviour>().CardUsed == 3)
             {
-                currentCardRenderer.material = glowRedBlue;
+                mat = glowRedBlue;
             }
             else
             {
-                currentCardRenderer.material = glowRed;
+                mat = glowRed;
             }
         }
-        CardAlreadyChosen = false;
 
+        MeshRenderer[] renderers = LastChosenCard.GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer rend in renderers)
+        {
+            rend.enabled = true;
+            rend.material = mat;
+        }
+
+        CardAlreadyChosen = false;
         planetLerpCounter = 0;
+        movesAvailable = 0;
     }
 
     void turnPlanet()
