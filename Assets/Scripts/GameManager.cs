@@ -35,6 +35,13 @@ public class GameManager : MonoBehaviour {
     public GameObject CardPrefab;
     public GameObject[] Cards;
 
+    public Material glowBlue;
+    public Material glowGold;
+    public Material glowRed;
+    public Material glowRedBlue;
+
+    public GameObject LastChosenCard;
+
     //Link Management
     //The star that was last clicked
     StarBehaviour LinkingStar;
@@ -55,8 +62,8 @@ public class GameManager : MonoBehaviour {
     public int StarNumber = 50;    //Number of stars
     public int CardNumber = 7;     //Number of cards
 
-    //public int movesAvailable = 10;
-    int movesAvailable = 0;
+    public int movesAvailable = 0;
+    //int movesAvailable = 0;
 
     //Audio
     int Clicks = 0;
@@ -64,6 +71,8 @@ public class GameManager : MonoBehaviour {
     public AudioClip[] ClickSounds;
     public AudioClip ConstellationSound;
 
+    private bool CardAlreadyChosen = false;
+    public int CardCurrentChosen = -1;
 
     // Use this for initialization
     void Start () {
@@ -72,8 +81,9 @@ public class GameManager : MonoBehaviour {
 
         LinkingStar = null;
 
-        int StartingCardX = CardNumber * -1 + 1;
-        Vector3 StartingCardPos = new Vector3(StartingCardX, -4.0f, 0); //The starting position of cards
+
+    int StartingCardX = CardNumber * -1 + 1;
+        Vector3 StartingCardPos = new Vector3(StartingCardX, -4.5f, 0); //The starting position of cards
 
 
 
@@ -179,20 +189,9 @@ public class GameManager : MonoBehaviour {
                 default:
                     break;
             }
-            StarList[0] = null;
+            FirstStar = null;
+            ChangeTurns();
 
-            if (Turn == Player.Player2)
-            {
-                P2Score += CurrentScoreTotal;
-                CurrentScoreTotal = 0;
-                Turn = Player.Player1;
-            }
-            else
-            {
-                P1Score += CurrentScoreTotal;
-                CurrentScoreTotal = 0;
-                Turn = Player.Player2;
-            }
 
             StarList.Clear();
             StarList.Capacity = 0; 
@@ -270,22 +269,82 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            if (movesAvailable <= 0)
+            if (movesAvailable <= 0 && CardAlreadyChosen)
             {
+                ChangeTurns();
                 Debug.Log("No moves available"); //We need to display this to the user somehow.
+
+            }
+            else if (movesAvailable <= 0 && !CardAlreadyChosen)
+            {
+                Debug.Log("Card not chosen yet");
             }
             else
             {
                 Debug.Log("Unknown error in linking stars. ");
-            }
+            }            
+
         }
         return false;
     }
 
-    public bool SetMovesAvailable(int CardMovesNumber)
+    public bool SetMovesAvailable(int CardMovesNumber, GameObject card)
     {
-       movesAvailable = CardMovesNumber;
+        if (CardAlreadyChosen == false)
+        {
+            LastChosenCard = card;
 
+            //HOW TO MATERIALS 4 AMBER LUV U 5EVA EK OH EK
+            MeshRenderer CardRenderer = card.GetComponentInChildren<MeshRenderer>();
+            CardRenderer.enabled = true;
+            CardRenderer.material = glowGold;
+
+            movesAvailable = CardMovesNumber;
+            CardAlreadyChosen = true;
+        }
         return true;
     }
+
+    void ChangeTurns()
+    {
+        movesAvailable = 0;
+
+        MeshRenderer currentCardRenderer = LastChosenCard.GetComponentInChildren<MeshRenderer>();
+        if (Turn == Player.Player1)
+        {
+            Debug.Log("Changing turns to " + Player.Player2);
+            P2Score += CurrentScoreTotal;
+            CurrentScoreTotal = 0;
+            Turn = Player.Player2;
+
+            if (LastChosenCard.GetComponentInChildren<CardBehaviour>().CardUsed == 3)
+            {
+                currentCardRenderer.material = glowRedBlue;
+            }
+            else
+            {
+                currentCardRenderer.material = glowBlue;
+            }
+
+        }
+       else if (Turn == Player.Player2)
+        {
+            Debug.Log("Changing turns to " + Player.Player1);
+            P1Score += CurrentScoreTotal;
+            CurrentScoreTotal = 0;
+            Turn = Player.Player1;
+
+            if (LastChosenCard.GetComponentInChildren<CardBehaviour>().CardUsed == 3)
+            {
+                currentCardRenderer.material = glowRedBlue;
+            }
+            else
+            {
+                currentCardRenderer.material = glowRed;
+            }
+        }
+
+        CardAlreadyChosen = false;
+    }
 }
+
