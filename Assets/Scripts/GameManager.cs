@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour {
     public Text currentMoves;
     public Text playerTurn;
     public Text firstTurnBonus;
+    public Text status;
 
     public int StarNumber = 50;    //Number of stars
     public int CardNumber = 7;     //Number of cards
@@ -172,6 +173,11 @@ public class GameManager : MonoBehaviour {
         else
             firstTurnBonus.text = "";
         playerTurn.text = "Current Player: " + Turn.ToString();
+
+        if (CardAlreadyChosen == false)
+        {
+            status.text = "Please select a card!";
+        }
 
         if (Input.GetKeyDown("escape"))
         {
@@ -364,7 +370,9 @@ public class GameManager : MonoBehaviour {
 
             }
             CardAlreadyChosen = true;
+            status.text = "Draw a Constellation!";
         }
+        
         return true;
     }
 
