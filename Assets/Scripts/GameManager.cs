@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour {
     public Text playerTurn;
     public Text firstTurnBonus;
     public Text status;
+    public Text currentScore;
 
     int StarNumber = 49;    //Number of stars
     public int CardNumber = 7;     //Number of cards
@@ -103,8 +104,8 @@ public class GameManager : MonoBehaviour {
         float XSpace = SpawnBoundaries[1].position.x - SpawnBoundaries[0].position.x;
         float YSpace = SpawnBoundaries[2].position.y - SpawnBoundaries[0].position.y;
 
-        float XIncrement = XSpace / 8;
-        float YIncrement = YSpace / 8;
+        float XIncrement = XSpace / 7;
+        float YIncrement = YSpace / 7;
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++)
@@ -187,6 +188,8 @@ public class GameManager : MonoBehaviour {
         P1Display.text = "Score: " + P1Score;
         P2Display.text = "Score: " + P2Score;
         currentMoves.text = "Current Moves Left: " + movesAvailable;
+        currentScore.text = "Current Constellation Score:" + CurrentScoreTotal;
+
         if (isFirstTurn && Turn == Player.Player2)
             firstTurnBonus.text = "+1 Move for going Second!";
         else

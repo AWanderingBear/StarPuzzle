@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MouseChase : MonoBehaviour {
 
+    public LayerMask backLayer;
 	// Use this for initialization
 	void Start () {
 	
@@ -10,10 +11,9 @@ public class MouseChase : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, backLayer))
         {
             transform.position = hit.point;
         }
