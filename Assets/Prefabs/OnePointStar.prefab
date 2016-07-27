@@ -87,8 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d265dba615ab9c244a783bde0ac7f296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerOneMat: {fileID: 2100000, guid: 6fc59bfce1d38e447993b3d2571711b6, type: 2}
-  PlayerTwoMat: {fileID: 2100000, guid: 6fcbace885f0bbf4d88caab41f97d140, type: 2}
+  PlayerOneMat: {fileID: 2100000, guid: 772bafbfa916f7e468b01da743bb4bbf, type: 2}
+  PlayerTwoMat: {fileID: 2100000, guid: b4f0bffb56207614483fefbf66288838, type: 2}
   ParticleEmitter: {fileID: 198000013988475006}
 --- !u!120 &12046378
 LineRenderer:
