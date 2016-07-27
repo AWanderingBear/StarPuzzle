@@ -31,7 +31,6 @@ public class CardBehaviour : MonoBehaviour
 
     void OnMouseDown()
     {
-
         if (Manager.Turn == Player.Player1 && CardUsed != 1 && CardUsed != 3)
         {
             Manager.SetMovesAvailable(CardMovesNumber, gameObject);
