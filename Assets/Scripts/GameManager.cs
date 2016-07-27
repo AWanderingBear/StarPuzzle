@@ -54,6 +54,9 @@ public class GameManager : MonoBehaviour {
     List<StarBehaviour> StarList;
     CardBehaviour SelectedCard;
 
+    //Star Spawning
+    public List<Transform> SpawnBoundaries;
+
     public Player Turn; // Tracks whose turn it is
 
     //Player Scoring
@@ -83,7 +86,6 @@ public class GameManager : MonoBehaviour {
     public AudioClip ConstellationSound;
 
     private bool CardAlreadyChosen = false;
-    public int CardCurrentChosen = -1;
 
     private bool isRotatingPlanet;
     private int planetLerpCounter = 60;
@@ -91,17 +93,16 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        //Initialising
         StarList = new List<StarBehaviour>();
 
         LinkingStar = null;
 
-
-
         //Spawning stars
         for (int i = 0; i < StarNumber; i++) {
 
-            float XCoord = Random.Range(-10.0f, 9.0f);
-            float YCoord = Random.Range(-3.0f, 3.5f);
+            float XCoord = Random.Range(SpawnBoundaries[0].position.x, SpawnBoundaries[1].position.x);
+            float YCoord = Random.Range(SpawnBoundaries[0].position.y, SpawnBoundaries[2].position.y);
 
             Vector3 Pos = new Vector3(XCoord, YCoord, 0);
 
@@ -146,7 +147,10 @@ public class GameManager : MonoBehaviour {
         //Spawning cards
 
         int StartingCardY = CardNumber * -1 + 2;
-        Vector3 StartingCardPos = new Vector3(7.0f, StartingCardY, 0); //The starting position of cards
+
+        float CardOffSet = SpawnBoundaries[1].position.x + (SpawnBoundaries[3].position.x - SpawnBoundaries[1].position.x)/2;
+
+        Vector3 StartingCardPos = new Vector3(CardOffSet, StartingCardY, 0); //The starting position of cards
 
         for (int i = 0; i < CardNumber; i++)
         {
@@ -169,7 +173,7 @@ public class GameManager : MonoBehaviour {
         P2Display.text = "Score: " + P2Score;
         currentMoves.text = "Current Moves Left: " + movesAvailable;
         if (isFirstTurn && Turn == Player.Player2)
-            firstTurnBonus.text = "+1 move - First turn bonus!";
+            firstTurnBonus.text = "+1 Move for going Second!";
         else
             firstTurnBonus.text = "";
         playerTurn.text = "Current Player: " + Turn.ToString();
