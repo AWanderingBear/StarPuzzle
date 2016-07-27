@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 //Player enum
 public enum Player
@@ -16,6 +17,10 @@ public class GameManager : MonoBehaviour {
     public GameObject StarOnePt;
     public GameObject StarTwoPt;
     public GameObject StarThreePt;
+
+    public Sprite StarFirstOnePt;
+    public Sprite StarFirstTwoPt;
+    public Sprite StarFirstThreePt;
 
     //Empty Gameobject to keep all of the stars in
     public GameObject StarParent;
@@ -34,7 +39,7 @@ public class GameManager : MonoBehaviour {
     //The star that was last clicked
     StarBehaviour LinkingStar;
     //The first star in the sequence
-    StarBehaviour[] StarList;
+    List<StarBehaviour> StarList;
     CardBehaviour SelectedCard;
 
     public Player Turn; // Tracks whose turn it is
@@ -62,6 +67,8 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+        StarList = new List<StarBehaviour>();
 
         LinkingStar = null;
 
@@ -143,7 +150,7 @@ public class GameManager : MonoBehaviour {
     public bool SetLinkingStar(StarBehaviour StarToLink)
     {
 
-        if (StarToLink == StarList[0])
+        if (StarList.Capacity > 0 && StarToLink == StarList[0])
         {
 
             AudioPlayer.clip = ConstellationSound;
@@ -173,11 +180,11 @@ public class GameManager : MonoBehaviour {
                     break;
             }
             StarList[0] = null;
-            
+
             if (Turn == Player.Player2)
             {
                 P2Score += CurrentScoreTotal;
-                CurrentScoreTotal = 0; 
+                CurrentScoreTotal = 0;
                 Turn = Player.Player1;
             }
             else
@@ -187,11 +194,15 @@ public class GameManager : MonoBehaviour {
                 Turn = Player.Player2;
             }
 
+            StarList.Clear();
+            StarList.Capacity = 0; 
+
             return true;
         }
         else if (LinkingStar != null && StarToLink != LinkingStar && (movesAvailable > 0))
         {
 
+            if (!StarToLink.IsUsed()) { 
             RaycastHit2D Hit = Physics2D.Raycast(LinkingStar.transform.position, StarToLink.transform.position - LinkingStar.transform.position);
 
             if (Hit)
@@ -204,7 +215,8 @@ public class GameManager : MonoBehaviour {
                     CurrentScoreTotal += StarToLink.GetScore();
                     LinkingStar = StarToLink;
 
-                    StarList
+                    StarList.Add(StarToLink);
+
                     StarToLink.Particle();
 
                     Clicks += 1;
@@ -215,25 +227,46 @@ public class GameManager : MonoBehaviour {
                     return true;
                 }
             }
+        }
 
             return false;
         }
-        else if (StarList[0] == null && (movesAvailable > 0))
+        else if (StarList.Capacity == 0 && (movesAvailable > 0))
         {
 
             LinkingStar = StarToLink;
-            StarList[0] = StarToLink;
+            StarList.Add(StarToLink);
 
             StarToLink.Particle();
 
             StarList[0].GetComponentInChildren<SpriteRenderer>().sprite = StarFirst;
-            CurrentScoreTotal = StarToLink.GetScore(); ;
+            CurrentScoreTotal = StarToLink.GetScore();
 
             Clicks = 1;
             AudioPlayer.clip = ClickSounds[Clicks - 1];
             AudioPlayer.Play();
 
-            return false;
+            switch (StarList[0].GetScore())
+            {
+
+                case 1:
+                    StarList[0].GetComponentInChildren<SpriteRenderer>().sprite = StarFirstOnePt;
+                    break;
+
+                case 2:
+                    StarList[0].GetComponentInChildren<SpriteRenderer>().sprite = StarFirstTwoPt;
+                    break;
+
+                case 3:
+                    StarList[0].GetComponentInChildren<SpriteRenderer>().sprite = StarFirstThreePt;
+                    break;
+
+                default:
+                    break;
+            }
+
+
+            return true;
         }
         else
         {

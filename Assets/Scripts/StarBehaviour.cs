@@ -11,6 +11,8 @@ public class StarBehaviour : MonoBehaviour {
     GameManager Manager;
     LineRenderer LinkRenderer;
 
+    bool Used = false;
+
     int Score;
 
 	// Use this for initialization
@@ -28,7 +30,7 @@ public class StarBehaviour : MonoBehaviour {
 
     void OnMouseDown()
     {
-        Manager.SetLinkingStar(this);
+        Used = Manager.SetLinkingStar(this);
     }
 
     public void SetLineTarget(Transform Target, Player CurrentPlayer)
@@ -67,5 +69,11 @@ public class StarBehaviour : MonoBehaviour {
     {
 
         ParticleEmitter.Emit(60);
+    }
+
+    public bool IsUsed()
+    {
+
+        return Used;
     }
 }

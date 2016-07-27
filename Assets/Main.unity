@@ -121,6 +121,9 @@ MonoBehaviour:
   StarTwoPt: {fileID: 1000013117585230, guid: 9dad9b3ff7194174799c149454983fea, type: 2}
   StarThreePt: {fileID: 1000012197301436, guid: ecb1caf9d8cba7f4d86daf8ea6598a58,
     type: 2}
+  StarFirstOnePt: {fileID: 21300000, guid: 4fb48c73828fcf448b4440d4c6228a58, type: 3}
+  StarFirstTwoPt: {fileID: 21300000, guid: 0bf2695197b404c489f1d0adc4e2564d, type: 3}
+  StarFirstThreePt: {fileID: 21300000, guid: 91bf5e068463f7441b71590f8cb7e386, type: 3}
   StarParent: {fileID: 797559873}
   StarFirst: {fileID: 21300000, guid: 087ba47356ad59d4b9efeac166f6f2bd, type: 3}
   CardParent: {fileID: 440984485}
@@ -190,7 +193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 186, y: 233.07}
+  m_AnchoredPosition: {x: 186.00003, y: 274.07}
   m_SizeDelta: {x: 163, y: 41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &100180028
@@ -264,7 +267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -379.75, y: 229.57}
+  m_AnchoredPosition: {x: -311.18, y: 272.53}
   m_SizeDelta: {x: 187, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &330650725
@@ -453,7 +456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 390.25, y: 235}
+  m_AnchoredPosition: {x: 321.68, y: 272.53}
   m_SizeDelta: {x: 166, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &581886507
@@ -758,7 +761,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63, y: 233.07}
+  m_AnchoredPosition: {x: -63.001, y: 276.03}
   m_SizeDelta: {x: 165, y: 41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1123226330
@@ -832,7 +835,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 69, y: 233.07}
+  m_AnchoredPosition: {x: 69.75, y: 274.07}
   m_SizeDelta: {x: 173.5, y: 41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1484439745
@@ -968,7 +971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -37, y: 232.57004}
+  m_AnchoredPosition: {x: -37, y: 276.52997}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1851949451
@@ -1036,7 +1039,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 84.50003, y: 233.57}
+  m_AnchoredPosition: {x: 84.5, y: 276.52997}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1881746061
@@ -1104,7 +1107,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -165.50117, y: 234.99785}
+  m_AnchoredPosition: {x: -165.5, y: 276.53}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5000003, y: 0.5000005}
 --- !u!114 &1890349249
@@ -1213,8 +1216,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1917317832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.51, y: 0.24, z: 1}
-  m_LocalScale: {x: 29.584368, y: 16.07774, z: 1}
+  m_LocalPosition: {x: 0.23, y: 0.12, z: 1}
+  m_LocalScale: {x: 31.906914, y: 23.58136, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -1300,7 +1303,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2016755848}
   serializedVersion: 2
-  lengthInSec: 5
+  lengthInSec: 1
   startDelay:
     scalar: 0
     maxCurve:
@@ -1339,9 +1342,9 @@ ParticleSystem:
   speed: 1
   randomSeed: 1111213928
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
-  moveWithTransform: 1
+  moveWithTransform: 0
   scalingMode: 1
   InitialModule:
     serializedVersion: 2
@@ -1747,7 +1750,7 @@ ParticleSystem:
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 10
+      scalar: 30
       maxCurve:
         serializedVersion: 2
         m_Curve:
