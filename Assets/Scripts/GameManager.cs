@@ -11,6 +11,10 @@ public enum Player
     Player2
 };
 
+//points per turn
+//extyra point for second player turn
+// grpahics that
+
 public class GameManager : MonoBehaviour {
 
     //Stars
@@ -28,7 +32,7 @@ public class GameManager : MonoBehaviour {
     //Sprites for each star
     public Sprite StarFirst;
 
-
+    public GameObject PlanetWithPlayers;
     //Move Cards
     //Empty game object to store them in
     public GameObject CardParent;
@@ -56,14 +60,16 @@ public class GameManager : MonoBehaviour {
     int CurrentScoreTotal = 0;
     public int P1Score = 0;
     public int P2Score = 0;
+    public int movesAvailable = 0;
 
     public Text P1Display;
     public Text P2Display;
+    public Text currentMoves;
 
     public int StarNumber = 50;    //Number of stars
     public int CardNumber = 7;     //Number of cards
 
-    public int movesAvailable = 0;
+
     //int movesAvailable = 0;
 
     //Audio
@@ -75,16 +81,15 @@ public class GameManager : MonoBehaviour {
     private bool CardAlreadyChosen = false;
     public int CardCurrentChosen = -1;
 
+    private bool isRotatingPlanet;
+    private int planetLerpCounter = 60;
+
     // Use this for initialization
     void Start () {
 
         StarList = new List<StarBehaviour>();
 
         LinkingStar = null;
-
-
-    int StartingCardX = CardNumber * -1 + 1;
-        Vector3 StartingCardPos = new Vector3(StartingCardX, -4.5f, 0); //The starting position of cards
 
 
 
@@ -134,8 +139,10 @@ public class GameManager : MonoBehaviour {
 
         }
 
-
         //Spawning cards
+
+        int StartingCardY = CardNumber * -1 + 2;
+        Vector3 StartingCardPos = new Vector3(7.0f, StartingCardY, 0); //The starting position of cards
 
         for (int i = 0; i < CardNumber; i++)
         {
@@ -147,7 +154,7 @@ public class GameManager : MonoBehaviour {
 
             CardClone.GetComponent<CardBehaviour>().initialize(randCardNumber);
 
-            StartingCardPos.x += 2;
+            StartingCardPos.y += 1.5f;
         }
 	}
 
@@ -156,10 +163,17 @@ public class GameManager : MonoBehaviour {
 
         P1Display.text = "Score: " + P1Score;
         P2Display.text = "Score: " + P2Score;
+        currentMoves.text = "Current Moves Left: " + movesAvailable;
 
         if (Input.GetKeyDown("escape"))
         {
             SceneManager.LoadScene("Finish");
+        }
+
+        if (planetLerpCounter < 60)
+        {
+            turnPlanet();
+            planetLerpCounter++;
         }
     }
 
@@ -300,8 +314,33 @@ public class GameManager : MonoBehaviour {
         {
             LastChosenCard = card;
 
-            //HOW TO MATERIALS 4 AMBER LUV U 5EVA EK OH EK
-            MeshRenderer CardRenderer = card.GetComponentInChildren<MeshRenderer>();
+            if (Turn == Player.Player1)
+            {
+                if (CardMovesNumber > 5 && CardMovesNumber <= 7)
+                {
+                    P1Score -= CardMovesNumber;
+
+                }
+                if (CardMovesNumber > 7)
+                {
+                    P1Score -= 2 * CardMovesNumber;
+                }
+            }
+            else if (Turn == Player.Player2)
+            {
+                if (CardMovesNumber > 5 && CardMovesNumber <= 7)
+                {
+                    P2Score -= CardMovesNumber;
+
+                }
+                if (CardMovesNumber > 7)
+                {
+                    P2Score -= 2 * CardMovesNumber;
+                }
+            }
+
+                //HOW TO MATERIALS 4 AMBER LUV U 5EVA EK OH EK
+                MeshRenderer CardRenderer = card.GetComponentInChildren<MeshRenderer>();
             CardRenderer.enabled = true;
             CardRenderer.material = glowGold;
 
@@ -318,8 +357,8 @@ public class GameManager : MonoBehaviour {
         MeshRenderer currentCardRenderer = LastChosenCard.GetComponentInChildren<MeshRenderer>();
         if (Turn == Player.Player1)
         {
-            Debug.Log("Changing turns to " + Player.Player2);
-            P2Score += CurrentScoreTotal;
+            Debug.Log("Changing turns to " + Player.Player1);
+            P1Score += CurrentScoreTotal;
             CurrentScoreTotal = 0;
             Turn = Player.Player2;
 
@@ -331,12 +370,11 @@ public class GameManager : MonoBehaviour {
             {
                 currentCardRenderer.material = glowBlue;
             }
-
         }
        else if (Turn == Player.Player2)
         {
-            Debug.Log("Changing turns to " + Player.Player1);
-            P1Score += CurrentScoreTotal;
+            Debug.Log("Changing turns to " + Player.Player2);
+            P2Score += CurrentScoreTotal;
             CurrentScoreTotal = 0;
             Turn = Player.Player1;
 
@@ -349,8 +387,16 @@ public class GameManager : MonoBehaviour {
                 currentCardRenderer.material = glowRed;
             }
         }
-
         CardAlreadyChosen = false;
+
+        planetLerpCounter = 0;
+    }
+
+    void turnPlanet()
+    {
+
+        Vector3 Lerping = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(0, 0, 180), 0.0166f);
+        PlanetWithPlayers.transform.Rotate(Lerping);
     }
 }
 
