@@ -11,6 +11,9 @@ public class StarBehaviour : MonoBehaviour {
     GameManager Manager;
     LineRenderer LinkRenderer;
 
+    bool SpinFlag = false;
+    int SpinCount = 0;
+
     bool Used = false;
 
     int Score;
@@ -25,7 +28,21 @@ public class StarBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        
+        if (SpinFlag)
+        {
+            if (SpinCount <= 30)
+            {
+                Vector3 Lerping = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(0, 0, 360), 0.0333f);
+                transform.Rotate(Lerping);
+                SpinCount++;
+            }
+            else
+            {
+                SpinCount = 0;
+                SpinFlag = false;
+            }
+
+        }
 	}
 
     void OnMouseDown()
@@ -75,5 +92,10 @@ public class StarBehaviour : MonoBehaviour {
     {
 
         return Used;
+    }
+
+    public void Spin()
+    {
+        SpinFlag = true;
     }
 }
