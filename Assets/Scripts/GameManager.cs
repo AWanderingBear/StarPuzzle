@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 //Player enum
 public enum Player
@@ -155,6 +156,11 @@ public class GameManager : MonoBehaviour {
 
         P1Display.text = "Score: " + P1Score;
         P2Display.text = "Score: " + P2Score;
+
+        if (Input.GetKeyDown("escape"))
+        {
+            SceneManager.LoadScene("Finish");
+        }
     }
 
     public bool SetLinkingStar(StarBehaviour StarToLink)
@@ -189,7 +195,7 @@ public class GameManager : MonoBehaviour {
                 default:
                     break;
             }
-            FirstStar = null;
+
             ChangeTurns();
 
 

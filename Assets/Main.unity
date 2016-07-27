@@ -129,6 +129,11 @@ MonoBehaviour:
   CardParent: {fileID: 440984485}
   CardPrefab: {fileID: 125710, guid: 4eef7c26423431b408eddeb824307c98, type: 2}
   Cards: []
+  glowBlue: {fileID: 2100000, guid: f9ce2c06874edb94cabd99048e89dec9, type: 2}
+  glowGold: {fileID: 2100000, guid: ed6d98f740016154795e037c5088b500, type: 2}
+  glowRed: {fileID: 2100000, guid: 6074d929ea1da2b43befb5320e454604, type: 2}
+  glowRedBlue: {fileID: 2100000, guid: 8bb0970d02090314abb2330b2f717c82, type: 2}
+  LastChosenCard: {fileID: 0}
   Turn: 0
   P1Score: 0
   P2Score: 0
@@ -136,6 +141,7 @@ MonoBehaviour:
   P2Display: {fileID: 581886507}
   StarNumber: 40
   CardNumber: 7
+  movesAvailable: 0
   AudioPlayer: {fileID: 944244236}
   ClickSounds:
   - {fileID: 8300000, guid: b3bb460464b110a48acd0ab75cd66826, type: 3}
@@ -148,6 +154,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 976576da2eda5734c872941488ddee03, type: 3}
   - {fileID: 8300000, guid: d34419f1dc68e824197918169e994c44, type: 3}
   ConstellationSound: {fileID: 8300000, guid: d80430c46b5c526459f3418e0f9fcd6f, type: 3}
+  CardCurrentChosen: -1
 --- !u!4 &33668066
 Transform:
   m_ObjectHideFlags: 0
@@ -1216,8 +1223,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1917317832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.23, y: 0.12, z: 1}
-  m_LocalScale: {x: 31.906914, y: 23.58136, z: 1}
+  m_LocalPosition: {x: 0.19, y: -0.09, z: 1}
+  m_LocalScale: {x: 17.100105, y: 13.06311, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
