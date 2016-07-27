@@ -150,7 +150,6 @@ MonoBehaviour:
   playerTurn: {fileID: 1877527859}
   firstTurnBonus: {fileID: 1143279170}
   status: {fileID: 1807629029}
-  StarNumber: 40
   CardNumber: 7
   AudioPlayer: {fileID: 944244236}
   ClickSounds:
@@ -978,8 +977,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 796.55, y: -477.3}
-  m_SizeDelta: {x: 375, y: 99}
+  m_AnchoredPosition: {x: 678.92, y: -477.3}
+  m_SizeDelta: {x: 606.85, y: 99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1143279170
 MonoBehaviour:
