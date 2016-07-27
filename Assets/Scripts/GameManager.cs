@@ -61,10 +61,13 @@ public class GameManager : MonoBehaviour {
     public int P1Score = 0;
     public int P2Score = 0;
     public int movesAvailable = 0;
+    private bool isFirstTurn = true;
 
     public Text P1Display;
     public Text P2Display;
     public Text currentMoves;
+    public Text playerTurn;
+    public Text firstTurnBonus;
 
     public int StarNumber = 50;    //Number of stars
     public int CardNumber = 7;     //Number of cards
@@ -164,6 +167,11 @@ public class GameManager : MonoBehaviour {
         P1Display.text = "Score: " + P1Score;
         P2Display.text = "Score: " + P2Score;
         currentMoves.text = "Current Moves Left: " + movesAvailable;
+        if (isFirstTurn && Turn == Player.Player2)
+            firstTurnBonus.text = "+1 move - First turn bonus!";
+        else
+            firstTurnBonus.text = "";
+        playerTurn.text = "Current Player: " + Turn.ToString();
 
         if (Input.GetKeyDown("escape"))
         {
@@ -344,11 +352,17 @@ public class GameManager : MonoBehaviour {
                 }
             }
 
-            MeshRenderer CardRenderer = card.GetComponentInChildren<MeshRenderer>();
+                //HOW TO MATERIALS 4 AMBER LUV U 5EVA EK OH EK
+                MeshRenderer CardRenderer = card.GetComponentInChildren<MeshRenderer>();
             CardRenderer.enabled = true;
             CardRenderer.material = glowGold;
 
             movesAvailable = CardMovesNumber;
+            if (isFirstTurn && Turn == Player.Player2)
+            {
+                movesAvailable+= 1;
+
+            }
             CardAlreadyChosen = true;
         }
         return true;
@@ -361,7 +375,6 @@ public class GameManager : MonoBehaviour {
         MeshRenderer currentCardRenderer = LastChosenCard.GetComponentInChildren<MeshRenderer>();
         if (Turn == Player.Player1)
         {
-            Debug.Log("Changing turns to " + Player.Player1);
             P1Score += CurrentScoreTotal;
             CurrentScoreTotal = 0;
             Turn = Player.Player2;
@@ -377,9 +390,9 @@ public class GameManager : MonoBehaviour {
         }
        else if (Turn == Player.Player2)
         {
-            Debug.Log("Changing turns to " + Player.Player2);
             P2Score += CurrentScoreTotal;
             CurrentScoreTotal = 0;
+            isFirstTurn = false;
             Turn = Player.Player1;
 
             if (LastChosenCard.GetComponentInChildren<CardBehaviour>().CardUsed == 3)
@@ -398,8 +411,7 @@ public class GameManager : MonoBehaviour {
 
     void turnPlanet()
     {
-
-        Vector3 Lerping = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(0, 0, 180), 0.0167f);
+        Vector3 Lerping = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(0, 0, 180), 0.0166f);
         PlanetWithPlayers.transform.Rotate(Lerping);
     }
 }
