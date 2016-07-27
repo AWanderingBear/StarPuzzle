@@ -212,6 +212,11 @@ public class GameManager : MonoBehaviour {
 
             ChangeTurns();
 
+            foreach (StarBehaviour iStar in StarList)
+            {
+                iStar.Spin();
+                iStar.Particle();
+            }
 
             StarList.Clear();
             StarList.Capacity = 0; 
@@ -339,8 +344,7 @@ public class GameManager : MonoBehaviour {
                 }
             }
 
-                //HOW TO MATERIALS 4 AMBER LUV U 5EVA EK OH EK
-                MeshRenderer CardRenderer = card.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer CardRenderer = card.GetComponentInChildren<MeshRenderer>();
             CardRenderer.enabled = true;
             CardRenderer.material = glowGold;
 
@@ -395,7 +399,7 @@ public class GameManager : MonoBehaviour {
     void turnPlanet()
     {
 
-        Vector3 Lerping = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(0, 0, 180), 0.0166f);
+        Vector3 Lerping = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(0, 0, 180), 0.0167f);
         PlanetWithPlayers.transform.Rotate(Lerping);
     }
 }
