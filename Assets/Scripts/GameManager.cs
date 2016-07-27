@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour {
     public Text firstTurnBonus;
     public Text status;
 
-    public int StarNumber = 50;    //Number of stars
+    int StarNumber = 49;    //Number of stars
     public int CardNumber = 7;     //Number of cards
 
 
@@ -99,49 +99,64 @@ public class GameManager : MonoBehaviour {
         LinkingStar = null;
 
         //Spawning stars
-        for (int i = 0; i < StarNumber; i++) {
 
-            float XCoord = Random.Range(SpawnBoundaries[0].position.x, SpawnBoundaries[1].position.x);
-            float YCoord = Random.Range(SpawnBoundaries[0].position.y, SpawnBoundaries[2].position.y);
+        float XSpace = SpawnBoundaries[1].position.x - SpawnBoundaries[0].position.x;
+        float YSpace = SpawnBoundaries[2].position.y - SpawnBoundaries[0].position.y;
 
-            Vector3 Pos = new Vector3(XCoord, YCoord, 0);
+        float XIncrement = XSpace / 8;
+        float YIncrement = YSpace / 8;
 
-            Quaternion Zero = new Quaternion(0, 0, 0, 0);
-
-            int Score = Random.Range(1, 4);
-            GameObject StarClone;
-
-            switch (Score) {
-
-                case 1: {
-
-                        StarClone = (GameObject)Instantiate(StarOnePt, Pos, Zero);
-                    }
-                    break;
-
-                case 2: {
-                        StarClone = (GameObject)Instantiate(StarTwoPt, Pos, Zero);
-                    }
-                    break;
-
-                case 3:
-                    {
-                        StarClone = (GameObject)Instantiate(StarThreePt, Pos, Zero);
-                    }
-                    break;
-
-                default:
-                    StarClone = null;
-                    break;
-            }
-
-            if (StarClone != null)
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++)
             {
-                StarClone.GetComponent<StarBehaviour>().SetScore(Score);
-                StarClone.transform.parent = StarParent.transform;
-                StarClone.name = "Star " + i;
-            }
 
+                float XSpawnSlot = SpawnBoundaries[0].position.x + XIncrement * j;
+                float YSpawnSlot = SpawnBoundaries[0].position.y + YIncrement * i;
+
+                float XCoord = Random.Range(XSpawnSlot, XSpawnSlot + XIncrement);
+                float YCoord = Random.Range(YSpawnSlot, YSpawnSlot + YIncrement);
+
+                Vector3 Pos = new Vector3(XCoord, YCoord, 0);
+
+                Quaternion Zero = new Quaternion(0, 0, 0, 0);
+
+                int Score = Random.Range(1, 4);
+                GameObject StarClone;
+
+                switch (Score)
+                {
+
+                    case 1:
+                        {
+
+                            StarClone = (GameObject)Instantiate(StarOnePt, Pos, Zero);
+                        }
+                        break;
+
+                    case 2:
+                        {
+                            StarClone = (GameObject)Instantiate(StarTwoPt, Pos, Zero);
+                        }
+                        break;
+
+                    case 3:
+                        {
+                            StarClone = (GameObject)Instantiate(StarThreePt, Pos, Zero);
+                        }
+                        break;
+
+                    default:
+                        StarClone = null;
+                        break;
+                }
+
+                if (StarClone != null)
+                {
+                    StarClone.GetComponent<StarBehaviour>().SetScore(Score);
+                    StarClone.transform.parent = StarParent.transform;
+                    StarClone.name = "Star " + i;
+                }
+            }
         }
 
         //Spawning cards
